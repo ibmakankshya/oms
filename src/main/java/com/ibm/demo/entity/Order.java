@@ -1,10 +1,11 @@
 package com.ibm.demo.entity;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class Order {
 	@NotNull
-	
+	@NotBlank //annotation for empty
 	private String item;
 	private int price;
 
