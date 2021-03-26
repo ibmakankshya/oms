@@ -1,7 +1,5 @@
 package com.ibm.demo;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.demo.Services.OrderService;
 import com.ibm.demo.entity.Order;
-
+import java.util.*;
 @RestController
 public class OrderController {
 	@Autowired
@@ -40,16 +38,16 @@ public class OrderController {
 	
 	
 	@GetMapping("/order/{id}")
-	String getOrder(@RequestBody @PathVariable("id") int orderID) {
+	Optional<Order> getOrder(@RequestBody @PathVariable("id") String orderID) {
 
 		return orderservice.getOrder(orderID);
 	}
 
 	@PutMapping("/order/{id}")
-	void updateOrder(@RequestBody @Valid Order order, BindingResult bindingResult, @PathVariable("id") int orderID) {
+	void updateOrder(@RequestBody @Valid Order order, BindingResult bindingResult, @PathVariable("id") String orderID) {
 		validateModel(bindingResult);
-		System.out.println(orderID);
-		 orderservice.updateOrder(orderID); //ideally updates dont return
+		System.out.println(order);
+		 orderservice.updateOrder(order); //ideally updates dont return
 	}
 
 	@DeleteMapping("/order/{id}")
